@@ -1,9 +1,9 @@
 import React from 'react'
+import styles from '../styles/About.module.scss'
 
 function About() {
   return (
-    <div>
-      <button className='btn btn-success'>About</button>
+    <div className={styles.highlightscss}>About
     </div>
   )
 }
