@@ -4,9 +4,14 @@ import Head from 'next/head'
 
 function Home() {
   return (
+    <>
+    <Head>
+      <title>Next Js</title>
+      <meta name ='description' content ='Next Js tutorials' />
+    </Head>
     <div className='content'> Home
-      
-    </div>
+     </div>
+    </>
   )
 }
 
