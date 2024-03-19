@@ -1,8 +1,10 @@
-import "@/styles/globals.css";
+import "styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css"
-import { ThemeProvider } from "styled-components";
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import "../components/Navbar.css"
+import { ThemeProvider } from "styled-components"
+import Header from '@/layout/Header'
+import Footer from '@/layout/Footer'
 import '../styles/layout.css'
 import Head from 'next/head'
 const theme ={
@@ -22,7 +24,8 @@ export default function App({ Component, pageProps }) {
     <title>Next Js</title>
     <meta name ='description' content ='Next Js tutorials' />
   </Head>
-  <Header />
+  {/* <Header /> */}
+  <Navbar />
   <Component {...pageProps} />;
   <Footer/>
   </>

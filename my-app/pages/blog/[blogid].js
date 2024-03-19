@@ -8,8 +8,9 @@ function Blog( {title,description}) {
       <title>{title}</title>
       <meta name ='description' content ={description} />
     </Head>
-    <div className='content'> Home
-     </div>
+    <h1 className='content'> Home
+    Env nalytics {process.env.NEXT_PUBLIC_ANALYTICS_ID}
+     </h1>
     </>
   )
 }
@@ -17,6 +18,9 @@ function Blog( {title,description}) {
 export default Blog
 
 export async function getServerSideProps(){
+  const user =process.env.DB_USER
+  const password = process.env.DB_PASSWORD
+  // console.log(`Connecting to database ${user} and password ${password}`)
     return{
         props:{
             title: 'Article title',
