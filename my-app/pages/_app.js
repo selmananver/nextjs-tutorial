@@ -7,6 +7,7 @@ import Header from '@/layout/Header'
 import Footer from '@/layout/Footer'
 import '../styles/layout.css'
 import Head from 'next/head'
+import { SessionProvider } from "next-auth/react";
 const theme ={
   colors:{
     primary:'#355C7D'
@@ -25,9 +26,12 @@ export default function App({ Component, pageProps }) {
     <meta name ='description' content ='Next Js tutorials' />
   </Head>
   {/* <Header /> */}
-  <Navbar />
+  <SessionProvider session ={pageProps.session}>
+  <Navbar  />
+  <Header/>
   <Component {...pageProps} />;
   <Footer/>
+  </SessionProvider>
   </>
   </ThemeProvider>
 

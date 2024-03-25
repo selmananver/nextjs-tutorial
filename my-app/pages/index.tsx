@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import { useSession } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const {data:session,status:loading} =useSession()
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -57,9 +60,13 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
+          {session && (
+            
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+         
+            Find in-depth information about  {session.user?.name} Next.js features and API.
           </p>
+          )}
         </a>
 
         <a
