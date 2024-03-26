@@ -1,36 +1,35 @@
-import NextAuth from 'next-auth';
-import GithubProvider from 'next-auth/providers/github'
-import { connectToDatabase } from '../../../pages/utils/db'
+// 
+import NextAuth from "next-auth";
+import GitHubProvider from 'next-auth/providers/github'
+import {connectToDatabase} from '../../../pages/utils/db'
 
 export default NextAuth({
-  providers: [
-    GithubProvider({
+  providers:[
+    GitHubProvider({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
+      clientSecret:process.env.GITHUB_SECRET,
+      secret:process.env.secret
+    })
   ],
-  callbacks: {
-    async signIn({user, account, profile}) {
-        console.log(user.id)
-      // Connect to the database
-      const { db, client } = await connectToDatabase();
+  callbacks:{
+    async signIn({user,profile,account}) {
+      const {client,db} = await connectToDatabase()
 
       try {
-        // Store user details in the database
-       const result = await db.collection('users').insertOne({
-          user:user
-          // You can store additional user data as needed
-        });
-        console.log("Inserted user:", result.insertedId);
-      } catch (error) {
-        console.error('Error storing user data:', error);
-      } finally {
-        // Close the database connection
-        await client.close();
+        const result = await db.collection('users').insertOne({
+          user:user,
+        })
+        console.log('User inserted with UserId',result.insertedId)
       }
+      catch(error) {
+        console.log('Failure in inserting data',error)
+      }
+      finally{
+         await client.close()
+      }
+      return true
 
-      return true;
-    },
-    // Add other callbacks as needed
-  },
-});
+
+      }
+    }
+})
